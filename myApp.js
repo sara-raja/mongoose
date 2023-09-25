@@ -1,8 +1,16 @@
 require('dotenv').config();
 let mongoose = require('mongoose');
-console.log(process.env.MONGO_URI);
+let express = require('express');
+
+let app = express();
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+absolutePath = __dirname + '/views/index.html';
+
+app.get("/", function(req, res) {
+  res.sendFile(absolutePath)
+})
 
 const personSchema = new mongoose.Schema({
   name: {
